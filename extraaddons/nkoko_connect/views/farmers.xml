@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!-- Farmers Form View -->
+        <record id="view_form_farmers" model="ir.ui.view">
+            <field name="name">Farmers Form View</field>
+            <field name="model">farmers</field>
+            <field name="arch" type="xml">
+                <form string="Farmers">
+                    <sheet>
+                        <div class="oe_title mb-0">
+                            <h1>
+                                <field name="user_id" readonly="1"/>
+                            </h1>
+                        </div>
+                        <group string="Farmer Details">
+                            <group>
+                                <field name="full_name" string="Full Name" options="{'no_create': True, 'edit': True}"/>
+                                <field name="phone_number" string="Phone Number" required="0"/>
+                            </group>
+                            <group>
+                                <field name="gps_location" string="GPS Location"/>
+                                <field name="prefered_language" string="Prefered Language"/>
+                            </group>
+                            <group>
+                                <field name="account_status" string="Account Status"/>
+                                <field name="registration_source" string="Registration Source"/>
+                            </group>
+                            <group>
+                                <field name="gender" string="Gender"/>
+                                <field name="date_of_birth" string="Date of Birth"/>
+                            </group>
+                            <group>
+                                <field name="photo" string="Photo"/>
+                                <field name="national_id_number" string="National ID Number"/>
+                            </group>
+                            <group>
+                                <field name="national_id_type" string="National ID Type"/>
+                                <field name="education_level" string="Education Level"/>
+                            </group>
+                            <group>
+                                <field name="farming_experience_years" string="Years of poultry farming experience"/>
+                                <field name="region" string="Region"/>
+                            </group>
+                            <group>
+                                <field name="district" string="District"/>
+                                <field name="community" string="Community"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Farmers Tree View -->
+        <record id="view_tree_farmers" model="ir.ui.view">
+            <field name="name">Farmers Tree View</field>
+            <field name="model">farmers</field>
+            <field name="arch" type="xml">
+                <list string="Farmers">
+                    <field name="full_name" options="{'no_create': True}"/>
+                    <field name="user_id"/>
+                    <field name="phone_number"/>
+                    <field name="gps_location"/>
+                    <field name="gender"/>
+                    <field name="date_of_birth"/>
+                    <field name="national_id_type"/>
+                    <field name="national_id_number"/>
+                    <field name="farming_experience_years"/>
+                    <field name="prefered_language"/>
+                    <field name="pin_code" optional="hide"/>
+                    <field name="account_status" optional="hide"/>
+                    <field name="registration_source" optional="hide"/>
+                    <field name="photo" optional="hide"/>
+                    <field name="education_level" optional="hide"/>
+                    <field name="region" optional="hide"/>
+                    <field name="district" optional="hide"/>
+                    <field name="community" optional="hide"/>
+                </list>
+            </field>
+        </record>
+
+        <!-- Sequence for Farmer Reference -->
+        <record id="seq_farmers" model="ir.sequence">
+            <field name="name">Farmer Reference</field>
+            <field name="code">farmers</field>
+            <field name="prefix">FAR</field>  <!-- Prefix for repayment -->
+            <field name="padding">5</field>   <!-- Ensures numbers like 00001, 00002 -->
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <!-- Farmers Action -->
+        <record id="action_farmers" model="ir.actions.act_window">
+            <field name="name">Farmers</field>
+            <field name="res_model">farmers</field>
+            <field name="view_mode">list,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Farmers.
+                </p>
+                <p>
+                    Track all farmers details.
+                </p>
+        </field>
+        </record>
+
+        <!-- Farmers Menu Item -->
+        <menuitem
+            id="menu_farmers"
+            sequence="1"
+            name="Farmers"
+            action="action_farmers"
+        />
+
+
+
+
+    </data>
+</odoo>
