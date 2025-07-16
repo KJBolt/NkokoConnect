@@ -60,10 +60,10 @@ class Farmers(models.Model):
         return super(Farmers, self).create(vals_list)
 
     # Redirect to farm details
-    def action_redirect_to_farm_details(self):
-        return {
-            'type': 'ir.actions.act_window',
-            'res_model': 'farm.details',
-            'view_mode': 'list',
-            'target': 'current',
-        }
+    # def action_redirect_to_farm_details(self):
+    #     return {
+    #         'type': 'ir.actions.act_window',
+    #         'res_model': 'farm.details',
+    #         'view_mode': 'list',
+    #         'target': 'current',
+    #     }
