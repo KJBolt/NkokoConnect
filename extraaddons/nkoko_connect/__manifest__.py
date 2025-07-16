@@ -11,8 +11,8 @@
         'website', 
         'sale_management',
         'im_livechat',
-        'utm',
         'spreadsheet_dashboard',
+        'auth_signup',
     ],
     'summary': "Farm management system for farmers",
     'author': "GeoiWorks",
@@ -20,8 +20,11 @@
     'description': """Farm management system for farmers""",
     'data': [
         'security/ir.model.access.csv',
+        'security/user_roles.xml',
         'views/farmers.xml',
         'views/hide_menus.xml',
+        'views/signup_template.xml',
+        'views/farm_details.xml',
     ],
     'assets': {
         'web.assets_frontend': [],

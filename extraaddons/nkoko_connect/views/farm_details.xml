@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Access Rights -->
+        <record id="farm_details_access_right" model="ir.model.access">
+            <field name="name">farm.details.access.right</field>
+            <field name="model_id" ref="model_farm_details"/>
+            <field name="group_id" ref="base.group_user"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="True"/>
+        </record>
+
+        <!-- Farm Details Form View -->
+        <record id="farm_details_form_view" model="ir.ui.view">
+            <field name="name">farm.details.form.view</field>
+            <field name="model">farm.details</field>
+            <field name="arch" type="xml">
+                <form string="Farm Details">
+                    <header>
+                        <button name="set_to_draft" type="object" string="Set to Draft" icon="fa-edit"/>
+                        <field name="status" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <group string="Enter Farm Details">
+                            <group>
+                                <field name="farmer_id" readonly="status == 'completed'"/>
+                                <field name="farm_name" readonly="status == 'completed'"/>
+                            </group>
+                            <group>
+                                <field name="farm_type" readonly="status == 'completed'"/>
+                                <field name="current_stock" readonly="status == 'completed'"/>
+                            </group>
+                            <group>
+                                <field name="max_capacity" readonly="status == 'completed'"/>
+                                <field name="housing_type" readonly="status == 'completed'"/>
+                            </group>
+                            <group>
+                                <field name="feed_source" readonly="status == 'completed'"/>
+                                <field name="water_source" readonly="status == 'completed'"/>
+                            </group>
+                            <group>
+                                <field name="biosecurity_measures" readonly="status == 'completed'"/>
+                                <field name="status" invisible="1"/>
+                            </group>
+                        </group>
+                    </sheet>
+                    <chatter />
+                </form>
+            </field>
+        </record>
+
+
+        <!-- Farm Details List View -->
+        <record id="farm_details_tree_view" model="ir.ui.view">
+            <field name="name">farm.details.tree.view</field>
+            <field name="model">farm.details</field>
+            <field name="arch" type="xml">
+                <list string="Farm Details">
+                    <field name="farmer_id"/>
+                    <field name="farm_name"/>
+                    <field name="farm_type"/>
+                    <field name="status" widget="badge" decoration-success="status == &quot;completed&quot;"/>
+                    <field name="current_stock"/>
+                    <field name="max_capacity"/>
+                    <field name="housing_type"/>
+                    <field name="feed_source"/>
+                    <field name="water_source"/>
+                    <field name="biosecurity_measures"/>
+                </list>
+            </field>
+        </record>
+
+        <!-- Farm Details Action -->
+        <record id="farm_details_action" model="ir.actions.act_window">
+            <field name="name">Farm Details</field>
+            <field name="res_model">farm.details</field>
+            <field name="view_mode">list,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Farmers.
+                </p>
+                <p>
+                    Manage Farm Details.
+                </p>
+            </field>
+        </record>
+
+        <!-- Farm Details Menu Item -->
+        <menuitem
+            id="farm_details_menu"
+            sequence="2"
+            name="Farm Details"
+            action="farm_details_action"
+        />
+    </data>
+</odoo>

@@ -7,7 +7,18 @@
             <field name="model">farmers</field>
             <field name="arch" type="xml">
                 <form string="Farmers">
+                    <header>
+                        <field name="status" widget="statusbar"/>
+                    </header>
                     <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button class="oe_stat_button" name="action_redirect_to_farm_details" type="object" icon="fa-plus">
+                                <div class="o_field_widget o_stat_info">
+                                    <span class="o_stat_text">Manage Farm Details</span>
+                                </div>
+                            </button>
+                        </div>
+
                         <div class="oe_title mb-0">
                             <h1>
                                 <field name="user_id" readonly="1"/>
@@ -15,7 +26,7 @@
                         </div>
                         <group string="Farmer Details">
                             <group>
-                                <field name="full_name" string="Full Name" options="{'no_create': True, 'edit': True}"/>
+                                <field name="full_name" string="Full Name"/>
                                 <field name="phone_number" string="Phone Number" required="0"/>
                             </group>
                             <group>
@@ -23,36 +34,36 @@
                                 <field name="prefered_language" string="Prefered Language"/>
                             </group>
                             <group>
-                                <field name="account_status" string="Account Status"/>
+                                <field name="gender" string="Gender"/>
                                 <field name="registration_source" string="Registration Source"/>
                             </group>
                             <group>
-                                <field name="gender" string="Gender"/>
+                                <field name="photo" string="Photo"/>
                                 <field name="date_of_birth" string="Date of Birth"/>
                             </group>
                             <group>
-                                <field name="photo" string="Photo"/>
+                                <field name="education_level" string="Education Level"/>
                                 <field name="national_id_number" string="National ID Number"/>
                             </group>
                             <group>
                                 <field name="national_id_type" string="National ID Type"/>
-                                <field name="education_level" string="Education Level"/>
-                            </group>
-                            <group>
-                                <field name="farming_experience_years" string="Years of poultry farming experience"/>
                                 <field name="region" string="Region"/>
                             </group>
                             <group>
+                                <field name="farming_experience_years" string="Years of poultry farming experience"/>
                                 <field name="district" string="District"/>
+                            </group>
+                            <group>
                                 <field name="community" string="Community"/>
                             </group>
                         </group>
                     </sheet>
+                    <chatter />
                 </form>
             </field>
         </record>
 
-        <!-- Farmers Tree View -->
+        <!-- Farmers List View -->
         <record id="view_tree_farmers" model="ir.ui.view">
             <field name="name">Farmers Tree View</field>
             <field name="model">farmers</field>
@@ -62,6 +73,7 @@
                     <field name="user_id"/>
                     <field name="phone_number"/>
                     <field name="gps_location"/>
+                    <field name="status" widget="badge" decoration-success="status == 'active'"/>
                     <field name="gender"/>
                     <field name="date_of_birth"/>
                     <field name="national_id_type"/>
@@ -69,7 +81,6 @@
                     <field name="farming_experience_years"/>
                     <field name="prefered_language"/>
                     <field name="pin_code" optional="hide"/>
-                    <field name="account_status" optional="hide"/>
                     <field name="registration_source" optional="hide"/>
                     <field name="photo" optional="hide"/>
                     <field name="education_level" optional="hide"/>
@@ -99,9 +110,9 @@
                     Farmers.
                 </p>
                 <p>
-                    Track all farmers details.
+                    Manage farmer details.
                 </p>
-        </field>
+            </field>
         </record>
 
         <!-- Farmers Menu Item -->
