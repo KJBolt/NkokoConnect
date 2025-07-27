@@ -103,7 +103,7 @@
         <!-- Farm Details Menu Item -->
         <menuitem
             id="farm_details_menu"
-            sequence="2"
+            sequence="3"
             name="Farm Details"
             action="farm_details_action"
         />

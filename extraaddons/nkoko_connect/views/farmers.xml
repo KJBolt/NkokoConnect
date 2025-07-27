@@ -143,7 +143,7 @@
         <!-- Farmers Menu Item -->
         <menuitem
             id="menu_farmers"
-            sequence="1"
+            sequence="2"
             name="Farmers"
             action="action_farmers"
         />

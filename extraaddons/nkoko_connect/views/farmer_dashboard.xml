@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!-- Client Action -->
+        <record id="action_farmer_dashboard" model="ir.actions.client">
+            <field name="name">Dashboard</field>
+            <field name="tag">farmer_dashboard</field> 
+            <field name="target">main</field>
+        </record>
+
+        <menuitem
+            id="menu_farmer_dashboard"
+            sequence="1"
+            name="Dashboard"
+            action="action_farmer_dashboard"
+        />
+    </data>
+</odoo>

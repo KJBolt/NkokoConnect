@@ -1,0 +1,54 @@
+<templates xml:space="preserve">
+    <t t-name="farmer_dashboard" owl="1">
+        <div class="o_demo my-10" style="overflow-y: scroll; height: 100vh;">
+            <h3 class="text-center my-5">Farmer Dashboard</h3>
+            
+            <div class="container">
+                <div class="row mb-5">
+                    <div class="col-sm-12 col-md-4 mb-3">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5>Total Revenue</h5>
+                            </div>
+                            <div class="card-body">
+                                <h3 style="font-size: 30px" t-esc="state.revenue_total.toFixed(2)" class="text-success"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-4 mb-3">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5>Total Expense</h5>
+                            </div>
+                            <div class="card-body">
+                                <h3 style="font-size: 30px" t-esc="state.expense_total.toFixed(2)" class="text-danger"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-4 mb-3">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5>Mortality Rate</h5>
+                            </div>
+                            <div class="card-body">
+                                <h3 style="font-size: 30px" t-esc="state.expense_total.toFixed(2)" class="text-danger"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 col-md-6 col-lg-6">
+                        <div>
+                            <canvas t-ref="chartCanvas" style="width: 100%; height: 300px;"></canvas>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-6 col-lg-6">
+                        <div>
+                            <canvas t-ref="lineCanvas" style="width: 100%; height: 300px;"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </t>
+</templates>

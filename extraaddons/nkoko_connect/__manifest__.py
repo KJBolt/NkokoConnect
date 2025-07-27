@@ -25,10 +25,14 @@
         'views/hide_menus.xml',
         'views/signup_template.xml',
         'views/farm_details.xml',
+        'views/farmer_dashboard.xml',
     ],
     'assets': {
         'web.assets_frontend': [],
-        'web.assets_backend': [],
+        'web.assets_backend': [
+            'nkoko_connect/static/src/js/farmer_dashboard.js',
+            'nkoko_connect/static/src/xml/farmer_dashboard.xml',
+        ],
     },
     'installable': True,
     'application': True,

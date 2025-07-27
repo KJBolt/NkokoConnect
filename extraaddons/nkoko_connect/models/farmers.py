@@ -54,18 +54,18 @@ class Farmers(models.Model):
 
     # Filter records based on user
     @api.model
-    def search(self, args, offset=0, limit=None, order=None, count=False):
+    def search(self, args, offset=0, limit=None, order=None):
         user = self.env.user
         
         # If user is admin, don't apply any filters
         if user.has_group('base.group_system'):
-            return super(Farmers, self).search(args or [], offset=offset, limit=limit, order=order, count=count)
+            return super(Farmers, self).search(args or [], offset=offset, limit=limit, order=order)
         
         # For regular users, filter only their records
         args = args or []
         args = ['|', ('user_id', '=', user.id), ('user_id', '=', False)] + args
         
-        return super(Farmers, self).search(args, offset=offset, limit=limit, order=order, count=count)
+        return super(Farmers, self).search(args, offset=offset, limit=limit, order=order)
 
     @api.model_create_multi
     def create(self, vals_list):
