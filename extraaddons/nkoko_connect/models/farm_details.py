@@ -1,4 +1,5 @@
 from odoo import models, fields, api
+from odoo.exceptions import UserError
 import logging
 
 logger = logging.getLogger(__name__)
@@ -11,6 +12,7 @@ class FarmDetails(models.Model):
     _order = 'id desc'
     _inherit = ['mail.thread']
 
+    user_id = fields.Many2one('res.users', string='Created By', default=lambda self: self.env.user, readonly=True, index=True)
     farmer_id = fields.Many2one('farmers', string='Farmer', required=True)
     farm_name = fields.Char(string='Name of Farm', required=False)
     farm_type = fields.Selection([
@@ -20,7 +22,6 @@ class FarmDetails(models.Model):
     ], 
     string='Farm Type', 
     required=True)
-
     current_stock = fields.Integer(string='Total No of Birds', required=True)
     max_capacity = fields.Integer(string='Farm Bird Capacity', required=False)
     housing_type = fields.Selection([
@@ -56,7 +57,6 @@ class FarmDetails(models.Model):
     string='Status',
     default='draft', 
     required=False)
-    user_id = fields.Many2one('res.users', string='Created By', default=lambda self: self.env.user, readonly=True, index=True)
     
 
     # Filter records based on user
@@ -100,3 +100,6 @@ class FarmDetails(models.Model):
         # Use the ORM to update the status with a context flag
         self.with_context(set_to_draft=True).write({'status': 'draft'})
         return True
+
+
+

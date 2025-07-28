@@ -39,18 +39,18 @@
                         <group string="Enter Farm Details">
                             <group>
                                 <field name="farmer_id" readonly="status == 'completed'"/>
-                                <field name="farm_name" readonly="status == 'completed'"/>
-                            </group>
-                            <group>
                                 <field name="farm_type" readonly="status == 'completed'"/>
-                                <field name="current_stock" readonly="status == 'completed'"/>
                             </group>
                             <group>
+                                <field name="farm_name" readonly="status == 'completed'"/>
                                 <field name="max_capacity" readonly="status == 'completed'"/>
-                                <field name="housing_type" readonly="status == 'completed'"/>
                             </group>
                             <group>
+                                <field name="current_stock" readonly="status == 'completed'" />
                                 <field name="feed_source" readonly="status == 'completed'"/>
+                            </group>
+                            <group>
+                                <field name="housing_type" readonly="status == 'completed'"/>
                                 <field name="water_source" readonly="status == 'completed'"/>
                             </group>
                             <group>

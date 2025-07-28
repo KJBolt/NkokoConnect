@@ -26,6 +26,8 @@
         'views/signup_template.xml',
         'views/farm_details.xml',
         'views/farmer_dashboard.xml',
+        'views/reminders.xml',
+        'data/cron.xml',
     ],
     'assets': {
         'web.assets_frontend': [],
