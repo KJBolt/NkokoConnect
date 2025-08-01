@@ -19,14 +19,13 @@
     'category': 'Farming',
     'description': """Farm management system for farmers""",
     'data': [
-        'security/ir.model.access.csv',
         'security/user_roles.xml',
-        'views/farmers.xml',
         'views/hide_menus.xml',
+        'views/farmer/farmers.xml',
         'views/signup_template.xml',
-        'views/farm_details.xml',
-        'views/farmer_dashboard.xml',
-        'views/reminders.xml',
+        'views/farmer/farm_details.xml',
+        'views/farmer/farmer_dashboard.xml',
+        'views/farmer/reminders.xml',
         'data/cron.xml',
     ],
     'assets': {

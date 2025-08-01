@@ -67,12 +67,14 @@ class Farmers(models.Model):
         
         return super(Farmers, self).search(args, offset=offset, limit=limit, order=order)
 
+
     @api.model_create_multi
     def create(self, vals_list):
         # Ensure we handle both single and multiple record creation
         for vals in vals_list:
             vals['status'] = 'active'
         return super(Farmers, self).create(vals_list)
+        
 
     # Redirect to farm details
     # def action_redirect_to_farm_details(self):

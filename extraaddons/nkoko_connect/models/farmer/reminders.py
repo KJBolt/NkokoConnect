@@ -10,6 +10,7 @@ class Reminders(models.Model):
     _name = 'reminders'
     _description = 'Reminders'
     _order = 'id desc'
+    _rec_name = 'farmer_id'
     _inherit = ['mail.thread']
 
     user_id = fields.Many2one('res.users', string='Created By', default=lambda self: self.env.user, readonly=True, index=True)
