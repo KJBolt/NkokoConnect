@@ -1,5 +1,6 @@
 from odoo import http
 from odoo.http import request
+from odoo.exceptions import UserError
 import logging
 
 _logger = logging.getLogger(__name__)
@@ -10,11 +11,14 @@ class TestController(http.Controller):
     def mofa_route(self, **kw):
         user = request.env['res.users'].sudo().search([('login', '=', request.session.get('login'))], limit=1)
         if user:
-            if user.user_role == 'mofa':
-                _logger.info("User role is mofa")
+            if user.user_role == 'farmer' or user.user_role == 'supplier' or user.user_role == 'admin':
+                return request.redirect('/page-restriction')
+
             else:
-                return request.redirect('/web/login')
+                return request.redirect('/web')
+
         else:
+            _logger.warning("No user found in session for /mofa endpoint")
             return request.redirect('/web/login')
 
 
@@ -79,11 +83,16 @@ class TestController(http.Controller):
     def procurement_route(self, **kw):
         user = request.env['res.users'].sudo().search([('login', '=', request.session.get('login'))], limit=1)
         if user:
+            _logger.info(f"User {user.login} has role: {user.user_role}")
             if user.user_role == 'supplier':
-                _logger.info("User role is supplier")
+                _logger.info("User role is supplier - access granted")
+                # Add your supplier-specific logic here
+                return request.redirect('/web')  # or wherever supplier users should go
             else:
+                _logger.warning(f"User {user.login} with role '{user.user_role}' attempted to access /procurement endpoint")
                 return request.redirect('/web/login')
         else:
+            _logger.warning("No user found in session for /procurement endpoint")
             return request.redirect('/web/login')
 
 
@@ -91,9 +100,14 @@ class TestController(http.Controller):
     def admin_route(self, **kw):
         user = request.env['res.users'].sudo().search([('login', '=', request.session.get('login'))], limit=1)
         if user:
+            _logger.info(f"User {user.login} has role: {user.user_role}")
             if user.user_role == 'admin':
-                _logger.info("User role is admin")
+                _logger.info("User role is admin - access granted")
+                # Add your admin-specific logic here
+                return request.redirect('/web')  # or wherever admin users should go
             else:
+                _logger.warning(f"User {user.login} with role '{user.user_role}' attempted to access /admin endpoint")
                 return request.redirect('/web/login')
         else:
+            _logger.warning("No user found in session for /admin endpoint")
             return request.redirect('/web/login')
