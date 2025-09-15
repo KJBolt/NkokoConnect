@@ -24,14 +24,20 @@ class TestController(http.Controller):
 
     @http.route('/farmer', type='http', auth="public", website=True)
     def farmer_route(self, **kw):
+        _logger.info("Farmer route called")
         user = request.env['res.users'].sudo().search([('login', '=', request.session.get('login'))], limit=1)
         if user:
+            _logger.info(f"User {user.login} has role: {user.user_role}")
             if user.user_role == 'farmer':
                 # Simplest approach: just redirect to the web client
                 # This will take the user to their dashboardt user
                 
                 # First, find the farmer record for this user
-                farmer = request.env['farmers'].sudo().search([('full_name', '=', user.partner_id.id)], limit=1)
+                _logger.info(f"Patner Id: {user.partner_id.id}")
+                _logger.info(f"User Id: {user.id}")
+                # farmer = request.env['farmers'].sudo().search([('full_name', '=', user.partner_id.id)], limit=1)
+                farmer = request.env['farmers'].sudo().search([('full_name', '=', user.login)], limit=1)
+                _logger.info(f"Farmer: {farmer}")
                 
                 if farmer:
                     _logger.info(f"Found farmer record for user {user.login}: {farmer.id}")
