@@ -19,6 +19,7 @@
     'category': 'Farming',
     'description': """Farm management system for farmers""",
     'data': [
+        'security/ir.model.access.csv',
         'security/user_roles.xml',
         'views/hide_menus.xml',
         'views/farmer/farmers.xml',

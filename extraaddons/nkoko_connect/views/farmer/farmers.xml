@@ -27,7 +27,7 @@
 
         <!-- Farmers Form View -->
         <record id="view_form_farmers" model="ir.ui.view">
-            <field name="name">Farmers Form View</field>
+            <field name="name">Farmer Form View</field>
             <field name="model">farmers</field>
             <field name="arch" type="xml">
                 <form string="Farmers">
@@ -89,7 +89,7 @@
 
         <!-- Farmers List View -->
         <record id="view_tree_farmers" model="ir.ui.view">
-            <field name="name">Farmers Tree View</field>
+            <field name="name">Farmer Tree View</field>
             <field name="model">farmers</field>
             <field name="arch" type="xml">
                 <list string="Farmers">
@@ -126,7 +126,7 @@
 
         <!-- Farmers Action -->
         <record id="action_farmers" model="ir.actions.act_window">
-            <field name="name">Farmers</field>
+            <field name="name">Farmer</field>
             <field name="res_model">farmers</field>
             <field name="view_mode">list,form</field>
             <field name="domain">[]</field>

@@ -58,21 +58,37 @@ class FarmDetails(models.Model):
     default='draft', 
     required=False)
     
+    
+    # Check if user already has a record 
+    @api.constrains('user_id')
+    def _check_farmer_record_limit(self):
+        for record in self:
+            # Only apply this constraint to farmer users
+            if record.user_id and record.user_id.has_group('nkoko_connect.group_farmer'):
+                # Check if this user already has a farmer record (excluding current record)
+                existing_records = self.search([
+                    ('user_id', '=', record.user_id.id),
+                    ('id', '!=', record.id)
+                ])
+                if existing_records:
+                    raise UserError(
+                        "You already have an existing record."
+                    )
 
     # Filter records based on user
-    @api.model
-    def search(self, args, offset=0, limit=None, order=None):
-        user = self.env.user
+    # @api.model
+    # def search(self, args, offset=0, limit=None, order=None):
+    #     user = self.env.user
         
-        # If user is admin, don't apply any filters
-        if user.has_group('base.group_system'):
-            return super(FarmDetails, self).search(args or [], offset=offset, limit=limit, order=order)
+    #     # If user is admin, don't apply any filters
+    #     if user.has_group('base.group_system'):
+    #         return super(FarmDetails, self).search(args or [], offset=offset, limit=limit, order=order)
         
-        # For regular users, filter only their records
-        args = args or []
-        args = ['|', ('user_id', '=', user.id), ('user_id', '=', False)] + args
+    #     # For regular users, filter only their records
+    #     args = args or []
+    #     args = ['|', ('user_id', '=', user.id), ('user_id', '=', False)] + args
         
-        return super(FarmDetails, self).search(args, offset=offset, limit=limit, order=order)
+    #     return super(FarmDetails, self).search(args, offset=offset, limit=limit, order=order)
 
     
     # Create Farm Details

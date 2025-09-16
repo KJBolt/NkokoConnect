@@ -1,4 +1,5 @@
 from odoo import models, fields, api
+from odoo.exceptions import UserError
 
 class Farmers(models.Model):
     _name = 'farmers'
@@ -52,20 +53,37 @@ class Farmers(models.Model):
     )
     user_id = fields.Many2one('res.users', string='Created By', default=lambda self: self.env.user, readonly=True, index=True)
 
+
+    # Check if user already has a record
+    @api.constrains('user_id')
+    def _check_farmer_record_limit(self):
+        for record in self:
+            # Only apply this constraint to farmer users
+            if record.user_id and record.user_id.has_group('nkoko_connect.group_farmer'):
+                # Check if this user already has a farmer record (excluding current record)
+                existing_records = self.search([
+                    ('user_id', '=', record.user_id.id),
+                    ('id', '!=', record.id)
+                ])
+                if existing_records:
+                    raise UserError(
+                        "You already have an existing farmer record."
+                    )
+
     # Filter records based on user
-    @api.model
-    def search(self, args, offset=0, limit=None, order=None):
-        user = self.env.user
+    # @api.model
+    # def search(self, args, offset=0, limit=None, order=None):
+    #     user = self.env.user
         
-        # If user is admin, don't apply any filters
-        if user.has_group('base.group_system'):
-            return super(Farmers, self).search(args or [], offset=offset, limit=limit, order=order)
+    #     # If user is admin, don't apply any filters
+    #     if user.has_group('base.group_system'):
+    #         return super(Farmers, self).search(args or [], offset=offset, limit=limit, order=order)
         
-        # For regular users, filter only their records
-        args = args or []
-        args = ['|', ('user_id', '=', user.id), ('user_id', '=', False)] + args
+    #     # For regular users, filter only their records
+    #     args = args or []
+    #     args = ['|', ('user_id', '=', user.id), ('user_id', '=', False)] + args
         
-        return super(Farmers, self).search(args, offset=offset, limit=limit, order=order)
+    #     return super(Farmers, self).search(args, offset=offset, limit=limit, order=order)
 
 
     @api.model_create_multi
